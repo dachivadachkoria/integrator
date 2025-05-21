@@ -1,6 +1,12 @@
 # 🔌 Integrator System
 This module provides a lightweight abstraction for integrating external CRUD-based APIs with your Django models. It defines a base Integrator class and a specialized CrudIntegrator class to manage create, update, and delete operations while mapping responses back to local Django models.
 
+
+## 📦 Installation
+
+```bash
+pip install dachintegrator
+```
 ## 📦 Classes Overview
 ### BaseIntegrator
 A base class designed to prepare data, configure headers, and validate HTTP responses.
