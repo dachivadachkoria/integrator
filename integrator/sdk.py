@@ -38,10 +38,6 @@ class BaseIntegrator:
         logging.info(f"Operation is successful for object: {response_content}")
         return response_content
 
-    def test(self):
-        print(self.data)
-        return self.data
-
 
 class CrudIntegrator(BaseIntegrator):
 
