@@ -1,11 +1,11 @@
-🔌 Integrator System
+# 🔌 Integrator System
 This module provides a lightweight abstraction for integrating external CRUD-based APIs with your Django models. It defines a base Integrator class and a specialized CrudIntegrator class to manage create, update, and delete operations while mapping responses back to local Django models.
 
-📦 Classes Overview
+## 📦 Classes Overview
 ### BaseIntegrator
 A base class designed to prepare data, configure headers, and validate HTTP responses.
 
-✅ Responsibilities:
+#### ✅ Responsibilities:
 Initialize headers, data, and rate_limit attributes.
 
 Provide a validate_response() method that:
@@ -18,7 +18,7 @@ Extracts and returns the 'id' from the JSON (or full content fallback).
 
 Convert a model-like object to dictionary using model.dict().
 
-🔧 Methods:
+#### 🔧 Methods:
 set_headers(): Override to define custom HTTP headers.
 
 set_data(model): Prepares the model payload as a dictionary.
@@ -28,14 +28,14 @@ validate_response(response): Handles status code and JSON parsing for HTTP respo
 ### CrudIntegrator
 A subclass of BaseIntegrator that specializes in full CRUD operations for Django models via external APIs.
 
-✅ Responsibilities:
+#### ✅ Responsibilities:
 Maps Django model classes to remote API endpoints.
 
 Sends HTTP requests to external systems.
 
 Writes responses back to local Django models (.objects.create(...), etc.).
 
-🧠 Requires:
+#### 🧠 Requires:
 A defined dictionary of object_types, mapping string keys to:
 
 model: A Django model class
@@ -44,7 +44,7 @@ endpoint: A relative API path
 
 A data_constraints structure to restrict invalid payloads (e.g. forbidden values).
 
-🔧 Methods:
+#### 🔧 Methods:
 create_object(object_id):
 Sends a POST request to the API. If successful, creates a corresponding object in the local DB.
 
@@ -60,7 +60,7 @@ Ensures object_type exists in the object_types mapping.
 validate_data():
 Enforces value constraints from data_constraints before proceeding with remote API operations.
 
-🧱 Type Definitions
+#### 🧱 Type Definitions
 Located in types.py (or definitions.py), used to enforce type safety:
 
 python
@@ -76,7 +76,7 @@ class DjangoModelProtocol(Protocol):
 class ObjectTypeDefinition(TypedDict):
     model: Type[DjangoModelProtocol]
     endpoint: str
-🧪 Example Usage
+#### 🧪 Example Usage
 python
 Copy
 Edit
@@ -98,7 +98,7 @@ class MyIntegrator(CrudIntegrator):
         return {
             "product": {"status": ["invalid", "archived"]}
         }
-🚨 Notes
+## 🚨 Notes
 This system assumes each remote object has an id returned in its API response.
 
 Make sure your models are compatible with the fields being returned or used.
